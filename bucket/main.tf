@@ -4,18 +4,18 @@ variable "zone" {
 variable "folder_id" {
   type = string
 }
-variable "vm_image_family" {
-  type = string
-}
-variable "vm_user" {
-  type = string
-}
-variable "ssh_key_path" {
-  type = string
-}
-variable "dns_zone" {
-  type = string
-}
+# variable "vm_image_family" {
+#   type = string
+# }
+# variable "vm_user" {
+#   type = string
+# }
+# variable "ssh_key_path" {
+#   type = string
+# }
+# variable "dns_zone" {
+#   type = string
+# }
 
 variable "sa_name" {
   type = string
@@ -28,17 +28,18 @@ variable "bucket_name" {
 
 
 locals {
-  network_name       = "web-network"
-  subnet_name        = "subnet1"
-  sg_vm_name         = "sg-web"
-  vm_name            = "lemp-vm"
-  dns_zone_name      = "example-zone"
+  # network_name       = "web-network"
+  # subnet_name        = "subnet1"
+  # sg_vm_name         = "sg-web"
+  # vm_name            = "lemp-vm"
+  # dns_zone_name      = "example-zone"
 }
 
 terraform {
   required_providers {
     yandex = {
       source = "yandex-cloud/yandex"
+      version = ">=0.101.0"
     }
   }
   required_version = ">=  0.47.0"

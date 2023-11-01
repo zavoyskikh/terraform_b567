@@ -4,7 +4,6 @@ terraform {
     yandex = {
       source  = "yandex-cloud/yandex"
       version = ">=0.101.0"
-
     }
   }
   required_version = ">=  0.13"
@@ -30,14 +29,14 @@ resource "yandex_vpc_network" "network" {
   name = "network"
 }
 
-resource "yandex_vpc_subnet" "subnet-1" {
+resource "yandex_vpc_subnet" "devop_yc_subnet1" {
   name           = "subnet1"
   v4_cidr_blocks = ["192.168.4.0/24"]
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
 }
 
-resource "yandex_vpc_subnet" "subnet-2" {
+resource "yandex_vpc_subnet" "devop_yc_subnet2" {
   name           = "subnet2"
   v4_cidr_blocks = ["192.168.2.0/24"]
   zone           = "ru-central1-b"
@@ -51,18 +50,18 @@ module "security_group" {
   egress-settings  = { "Allow all" = { port = -1 } }
 }
 
-module "vm-instance-1" {
+module "devop_vm_instance1" {
   source          = "./modules/instance"
   vm_image_family = "lemp"
-  subnet_id       = yandex_vpc_subnet.subnet-1.id
+  subnet_id       = yandex_vpc_subnet.devop_yc_subnet1.id
   #  zone = "ru-central1-a"
   security_group_ids = [module.security_group.security_group_id]
 }
 
-module "vm-instance-2" {
+module "devop_vm_instance2" {
   source             = "./modules/instance"
   vm_image_family    = "lamp"
-  subnet_id          = yandex_vpc_subnet.subnet-2.id
+  subnet_id          = yandex_vpc_subnet.devop_yc_subnet2.id
   zone               = "ru-central1-b"
   security_group_ids = [module.security_group.security_group_id]
 }
