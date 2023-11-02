@@ -38,7 +38,7 @@ locals {
 terraform {
   required_providers {
     yandex = {
-      source = "yandex-cloud/yandex"
+      source  = "yandex-cloud/yandex"
       version = ">=0.101.0"
     }
   }
@@ -46,8 +46,8 @@ terraform {
 }
 
 provider "yandex" {
-    zone = var.zone
-    folder_id = var.folder_id
+  zone      = var.zone
+  folder_id = var.folder_id
 }
 
 resource "yandex_iam_service_account" "sa" {
@@ -62,13 +62,13 @@ resource "yandex_resourcemanager_folder_iam_member" "sa-editor" {
 }
 
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
- service_account_id = yandex_iam_service_account.sa.id
- description        = "сервисный ключ для задания"
+  service_account_id = yandex_iam_service_account.sa.id
+  description        = "сервисный ключ для задания"
 }
 
 resource "yandex_storage_bucket" "state" {
-  bucket = var.bucket_name
+  bucket     = var.bucket_name
   access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
 }
-  
+

@@ -1,28 +1,28 @@
 variable "zone" {
-  type = string
+  type    = string
   default = "ru-central1-a"
 }
 
 variable "vm_image_family" {
-  type = string
+  type    = string
   default = "lemp"
 }
 
 variable "subnet_id" {
-    type = string
+  type = string
 }
 
 variable "security_group_ids" {
-    type = list(string)
+  type = list(string)
 }
 
 variable "vm_user" {
-    type = string
-    default = "admin"
+  type    = string
+  default = "admin"
 }
 
 variable "ssh_key_path" {
-    type = string
-    default = "~/.ssh/id_rsa.pub"
-  
+  type    = string
+  default = "~/.ssh/id_rsa.pub"
+
 }
